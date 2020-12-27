@@ -23,21 +23,21 @@ int writeF32MonoWav(char *wavFileName, float *sndData, int sampleCnt, int sample
    
    // file size except for "RIFF\0\0\0\0"
    chunkSize = sampleCnt * sizeof(float) + sizeof(waveFormatChunk) - 8;
-   strncpy(&waveFormatChunk[4], (char *)(&chunkSize), 4);
+   memcpy(&waveFormatChunk[4], (char *)(&chunkSize), 4);
    
    // samples per second
-   strncpy(&waveFormatChunk[24], (char *)(&sampleRate), 4);
+   memcpy(&waveFormatChunk[24], (char *)(&sampleRate), 4);
    
    // bytes per second
    byteRate = sampleRate * sizeof(float);
-   strncpy(&waveFormatChunk[28], (char *)(&byteRate), 4);
+   memcpy(&waveFormatChunk[28], (char *)(&byteRate), 4);
    
    // frame count
-   strncpy(&waveFormatChunk[46], (char *)(&sampleCnt), 4);
+   memcpy(&waveFormatChunk[46], (char *)(&sampleCnt), 4);
    
    // size of data
    subChunkSize = sampleCnt * sizeof(float);
-   strncpy(&waveFormatChunk[54], (char *)(&subChunkSize), 4);
+   memcpy(&waveFormatChunk[54], (char *)(&subChunkSize), 4);
    
 
    // open file for write
@@ -80,21 +80,21 @@ int writeF32StereoWav(char *wavFileName, float *sndDataLft, float *sndDataRght, 
    
    // file size except for "RIFF\0\0\0\0"
    chunkSize = sampleCnt * sizeof(float) * 2 + sizeof(waveFormatChunk) - 8;
-   strncpy(&waveFormatChunk[4], (char *)(&chunkSize), 4);
+   memcpy(&waveFormatChunk[4], (char *)(&chunkSize), 4);
    
    // samples per second
-   strncpy(&waveFormatChunk[24], (char *)(&sampleRate), 4);
+   memcpy(&waveFormatChunk[24], (char *)(&sampleRate), 4);
    
    // bytes per second
    byteRate = sampleRate * sizeof(float) * 2;
-   strncpy(&waveFormatChunk[28], (char *)(&byteRate), 4);
+   memcpy(&waveFormatChunk[28], (char *)(&byteRate), 4);
    
    // frame count
-   strncpy(&waveFormatChunk[46], (char *)(&sampleCnt), 4);
+   memcpy(&waveFormatChunk[46], (char *)(&sampleCnt), 4);
    
    // size of data
    subChunkSize = sampleCnt * sizeof(float) * 2;
-   strncpy(&waveFormatChunk[54], (char *)(&subChunkSize), 4);
+   memcpy(&waveFormatChunk[54], (char *)(&subChunkSize), 4);
    
 
    // open file for write
